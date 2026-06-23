@@ -1,4 +1,5 @@
 import Foundation
+import WidgetKit
 
 enum TimeRange: String, CaseIterable, Identifiable {
     case oneHour = "1H"
@@ -18,7 +19,13 @@ enum TimeRange: String, CaseIterable, Identifiable {
 final class TrafficViewModel: ObservableObject {
     @Published var interfaces: [InterfaceStat] = []
     @Published var history: InterfaceHistory = [:]
-    @Published var selectedInterface: String?
+    @Published var selectedInterface: String? {
+        didSet {
+            guard selectedInterface != oldValue else { return }
+            AppGroup.defaults.set(selectedInterface, forKey: SettingsKey.selectedInterface)
+            WidgetCenter.shared.reloadTimelines(ofKind: TrafficWidgetKind.id)
+        }
+    }
     @Published var timeRange: TimeRange = .oneHour
     @Published var errorMessage: String?
     @Published var isLoading = false
@@ -75,7 +82,11 @@ final class TrafficViewModel: ObservableObject {
             let stats = try await client.fetchInterfaces()
             interfaces = stats.sorted { $0.name < $1.name }
             if selectedInterface == nil {
-                selectedInterface = interfaces.first(where: { $0.wan == true })?.name ?? interfaces.first?.name
+                let saved = AppGroup.defaults.string(forKey: SettingsKey.selectedInterface)
+                let savedStillPresent = saved.flatMap { name in interfaces.contains { $0.name == name } ? name : nil }
+                selectedInterface = savedStillPresent
+                    ?? interfaces.first(where: { $0.wan == true })?.name
+                    ?? interfaces.first?.name
             }
             errorMessage = nil
         } catch {

@@ -1,7 +1,8 @@
 import SwiftUI
+import WidgetKit
 
 struct ContentView: View {
-    @AppStorage("serverURL") private var serverURL: String = ""
+    @AppStorage(SettingsKey.serverURL, store: AppGroup.defaults) private var serverURL: String = ""
     @StateObject private var viewModel = TrafficViewModel()
     @State private var showSettings = false
 
@@ -41,6 +42,7 @@ struct ContentView: View {
                 } else {
                     viewModel.stop()
                 }
+                WidgetCenter.shared.reloadTimelines(ofKind: TrafficWidgetKind.id)
             }
         }
     }

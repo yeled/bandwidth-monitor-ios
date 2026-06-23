@@ -8,30 +8,75 @@
 
 /* Begin PBXBuildFile section */
 		00F2919BEA5EB3BA2A3EF5A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49334065748C1158A6170B19 /* ContentView.swift */; };
-		07092A161E8C238E04FD0876 /* HistoryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D0CA764D05E8753DD4B234 /* HistoryPoint.swift */; };
 		279A8649BB3FC80053FFF2F9 /* BandwidthMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0600D61430866A01647CA12C /* BandwidthMonitorApp.swift */; };
+		479F6E9DD0CBC3E9A0D84413 /* TrafficWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160D9161B12F2FC113E69A0A /* TrafficWidgetProvider.swift */; };
+		559D775C0FF6BEF5EC375DE7 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622E5C269CC66019B98E055 /* AppGroup.swift */; };
+		56E5DD946C27A34DBD422865 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622E5C269CC66019B98E055 /* AppGroup.swift */; };
 		6C17C05D169DF34589DCB20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8768ED223EE3703AA78447C7 /* Assets.xcassets */; };
+		798468EA50CE3FF2AAA2845E /* TrafficWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19E80CE2325B99B43828E84 /* TrafficWidgetEntry.swift */; };
 		7AB6FA247B4F198E33E194FF /* TrafficChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6F18BE6080C1A64EF78DA /* TrafficChartView.swift */; };
-		81951984A2943AD4AA1A6B62 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55C7B06131B152FAA3B9F1 /* APIClient.swift */; };
 		95248B3B8810A9C35D89FB1B /* TrafficViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACF2AD0CE1B0551A7B7440F /* TrafficViewModel.swift */; };
+		9A8D87CBC8ACE09CA2B8DF7C /* InterfaceStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ED91D2C0BF780BA7BFC9E /* InterfaceStat.swift */; };
 		9CB9DCEF352C02872D1D7DF4 /* InterfaceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E07872E12AB4027F588B8 /* InterfaceRowView.swift */; };
-		ADBEEB335C6103099B0901FD /* InterfaceStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED79A2179959CD8251548620 /* InterfaceStat.swift */; };
+		A5C8BE902B0194C9C70C591D /* HistoryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41B818C518FA4701215D5E3 /* HistoryPoint.swift */; };
+		C7D6C5F6BE3DCB85E51A1602 /* TrafficWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A5AFBCD8C9D51EB7BC2A6 /* TrafficWidgetView.swift */; };
+		CF55481C4454D0E8908330D7 /* TrafficWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E939948010D3FAD512E0CC /* TrafficWidget.swift */; };
+		D06A66B8CD01F6367856B5DF /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21AD777356E0FB8977E3C8 /* APIClient.swift */; };
+		DB5D907116774FC5F329B62D /* BandwidthMonitorWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5E2FEF1CEAEE2E15DDB7AD4A /* BandwidthMonitorWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DE48FC8BA8CF62E0E8CA9B52 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21AD777356E0FB8977E3C8 /* APIClient.swift */; };
+		DF146B3DDE94388AFE1D7942 /* InterfaceStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ED91D2C0BF780BA7BFC9E /* InterfaceStat.swift */; };
 		DF31782CE503430F8F8BF1A1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1521E83C5877E217D289214 /* SettingsView.swift */; };
+		EB8171A9171AAA57FF8D27F2 /* BandwidthMonitorWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9296780A7389B7812E950F /* BandwidthMonitorWidgetBundle.swift */; };
+		F4F00FEE22135281BD9686F3 /* HistoryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41B818C518FA4701215D5E3 /* HistoryPoint.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C0D3FB7BA2BBBBFA16676BE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D09C42502736A8FD71573AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 199E90EBDA0B38BE832E5E52;
+			remoteInfo = BandwidthMonitorWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1B4E29BA341521577F50FB6E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DB5D907116774FC5F329B62D /* BandwidthMonitorWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0600D61430866A01647CA12C /* BandwidthMonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandwidthMonitorApp.swift; sourceTree = "<group>"; };
+		08F6524CEFC07CB022CCFE99 /* BandwidthMonitorWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BandwidthMonitorWidget.entitlements; sourceTree = "<group>"; };
 		0C56D8BB31352FE7628FB74B /* BandwidthMonitor.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BandwidthMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		160D9161B12F2FC113E69A0A /* TrafficWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWidgetProvider.swift; sourceTree = "<group>"; };
 		49334065748C1158A6170B19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4ACF2AD0CE1B0551A7B7440F /* TrafficViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficViewModel.swift; sourceTree = "<group>"; };
 		4F508350C548621FA369219F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		505ED91D2C0BF780BA7BFC9E /* InterfaceStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceStat.swift; sourceTree = "<group>"; };
 		5BE6F18BE6080C1A64EF78DA /* TrafficChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficChartView.swift; sourceTree = "<group>"; };
-		82D0CA764D05E8753DD4B234 /* HistoryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPoint.swift; sourceTree = "<group>"; };
+		5E2FEF1CEAEE2E15DDB7AD4A /* BandwidthMonitorWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = BandwidthMonitorWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7072ECA56E71F95F511DC463 /* BandwidthMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BandwidthMonitor.entitlements; sourceTree = "<group>"; };
+		79FED34CB681E23AEB57F638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8768ED223EE3703AA78447C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8D55C7B06131B152FAA3B9F1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		B69E07872E12AB4027F588B8 /* InterfaceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceRowView.swift; sourceTree = "<group>"; };
+		BD9296780A7389B7812E950F /* BandwidthMonitorWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandwidthMonitorWidgetBundle.swift; sourceTree = "<group>"; };
+		BF7A5AFBCD8C9D51EB7BC2A6 /* TrafficWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWidgetView.swift; sourceTree = "<group>"; };
 		C1521E83C5877E217D289214 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		ED79A2179959CD8251548620 /* InterfaceStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceStat.swift; sourceTree = "<group>"; };
+		C19E80CE2325B99B43828E84 /* TrafficWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWidgetEntry.swift; sourceTree = "<group>"; };
+		C8E939948010D3FAD512E0CC /* TrafficWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWidget.swift; sourceTree = "<group>"; };
+		D41B818C518FA4701215D5E3 /* HistoryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPoint.swift; sourceTree = "<group>"; };
+		DB21AD777356E0FB8977E3C8 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		E622E5C269CC66019B98E055 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -50,21 +95,29 @@
 			isa = PBXGroup;
 			children = (
 				8768ED223EE3703AA78447C7 /* Assets.xcassets */,
+				7072ECA56E71F95F511DC463 /* BandwidthMonitor.entitlements */,
 				4F508350C548621FA369219F /* Info.plist */,
 				96300D1FC2A6E629B01FD84D /* App */,
-				4B5F1F7552893B0519A85A54 /* Models */,
-				D91699E7E6F2044C4A7007DA /* Networking */,
+				B535CBE5AA2B07C48582AAE0 /* Shared */,
 				F2AE853155DD05426CEBC5FB /* ViewModels */,
 				06B8AF16B9281B4EF7C4DBB8 /* Views */,
 			);
 			path = BandwidthMonitor;
 			sourceTree = "<group>";
 		};
-		4B5F1F7552893B0519A85A54 /* Models */ = {
+		172AEDB550E8201BFF5D4AD3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				82D0CA764D05E8753DD4B234 /* HistoryPoint.swift */,
-				ED79A2179959CD8251548620 /* InterfaceStat.swift */,
+				E622E5C269CC66019B98E055 /* AppGroup.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		6AB62C61212ADB68779DD9B4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D41B818C518FA4701215D5E3 /* HistoryPoint.swift */,
+				505ED91D2C0BF780BA7BFC9E /* InterfaceStat.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -73,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				0EC3240D7584A9A45005D590 /* BandwidthMonitor */,
+				F2FF84128C41E4A1E83E7A35 /* BandwidthMonitorWidget */,
 				D11160709C7FEAE15FA83B44 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,20 +139,31 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		9930465C0B2C5D097023A1D7 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				DB21AD777356E0FB8977E3C8 /* APIClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		B535CBE5AA2B07C48582AAE0 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6AB62C61212ADB68779DD9B4 /* Models */,
+				9930465C0B2C5D097023A1D7 /* Networking */,
+				172AEDB550E8201BFF5D4AD3 /* Settings */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		D11160709C7FEAE15FA83B44 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				0C56D8BB31352FE7628FB74B /* BandwidthMonitor.app */,
+				5E2FEF1CEAEE2E15DDB7AD4A /* BandwidthMonitorWidgetExtension.appex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D91699E7E6F2044C4A7007DA /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				8D55C7B06131B152FAA3B9F1 /* APIClient.swift */,
-			);
-			path = Networking;
 			sourceTree = "<group>";
 		};
 		F2AE853155DD05426CEBC5FB /* ViewModels */ = {
@@ -109,19 +174,52 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		F2FF84128C41E4A1E83E7A35 /* BandwidthMonitorWidget */ = {
+			isa = PBXGroup;
+			children = (
+				08F6524CEFC07CB022CCFE99 /* BandwidthMonitorWidget.entitlements */,
+				BD9296780A7389B7812E950F /* BandwidthMonitorWidgetBundle.swift */,
+				79FED34CB681E23AEB57F638 /* Info.plist */,
+				C8E939948010D3FAD512E0CC /* TrafficWidget.swift */,
+				C19E80CE2325B99B43828E84 /* TrafficWidgetEntry.swift */,
+				160D9161B12F2FC113E69A0A /* TrafficWidgetProvider.swift */,
+				BF7A5AFBCD8C9D51EB7BC2A6 /* TrafficWidgetView.swift */,
+			);
+			path = BandwidthMonitorWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		199E90EBDA0B38BE832E5E52 /* BandwidthMonitorWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E0AC69C7ECF8DD16AB873E1 /* Build configuration list for PBXNativeTarget "BandwidthMonitorWidgetExtension" */;
+			buildPhases = (
+				9C21B3E8286A4A1D2EDE9715 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BandwidthMonitorWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = BandwidthMonitorWidgetExtension;
+			productReference = 5E2FEF1CEAEE2E15DDB7AD4A /* BandwidthMonitorWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B37F0F8AEA25CA579D45B435 /* BandwidthMonitor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DF25D2A429C7D1FAF92447B4 /* Build configuration list for PBXNativeTarget "BandwidthMonitor" */;
 			buildPhases = (
 				1FFC159CB6642A29A2E64E7B /* Sources */,
 				7885ADC82C5C9407A2F3674D /* Resources */,
+				1B4E29BA341521577F50FB6E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CA8D560A889AE3C8983CD6B9 /* PBXTargetDependency */,
 			);
 			name = BandwidthMonitor;
 			packageProductDependencies = (
@@ -139,6 +237,10 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					199E90EBDA0B38BE832E5E52 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
 					B37F0F8AEA25CA579D45B435 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
@@ -160,6 +262,7 @@
 			projectRoot = "";
 			targets = (
 				B37F0F8AEA25CA579D45B435 /* BandwidthMonitor */,
+				199E90EBDA0B38BE832E5E52 /* BandwidthMonitorWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -180,21 +283,62 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81951984A2943AD4AA1A6B62 /* APIClient.swift in Sources */,
+				D06A66B8CD01F6367856B5DF /* APIClient.swift in Sources */,
+				559D775C0FF6BEF5EC375DE7 /* AppGroup.swift in Sources */,
 				279A8649BB3FC80053FFF2F9 /* BandwidthMonitorApp.swift in Sources */,
 				00F2919BEA5EB3BA2A3EF5A7 /* ContentView.swift in Sources */,
-				07092A161E8C238E04FD0876 /* HistoryPoint.swift in Sources */,
+				F4F00FEE22135281BD9686F3 /* HistoryPoint.swift in Sources */,
 				9CB9DCEF352C02872D1D7DF4 /* InterfaceRowView.swift in Sources */,
-				ADBEEB335C6103099B0901FD /* InterfaceStat.swift in Sources */,
+				9A8D87CBC8ACE09CA2B8DF7C /* InterfaceStat.swift in Sources */,
 				DF31782CE503430F8F8BF1A1 /* SettingsView.swift in Sources */,
 				7AB6FA247B4F198E33E194FF /* TrafficChartView.swift in Sources */,
 				95248B3B8810A9C35D89FB1B /* TrafficViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C21B3E8286A4A1D2EDE9715 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE48FC8BA8CF62E0E8CA9B52 /* APIClient.swift in Sources */,
+				56E5DD946C27A34DBD422865 /* AppGroup.swift in Sources */,
+				EB8171A9171AAA57FF8D27F2 /* BandwidthMonitorWidgetBundle.swift in Sources */,
+				A5C8BE902B0194C9C70C591D /* HistoryPoint.swift in Sources */,
+				DF146B3DDE94388AFE1D7942 /* InterfaceStat.swift in Sources */,
+				CF55481C4454D0E8908330D7 /* TrafficWidget.swift in Sources */,
+				798468EA50CE3FF2AAA2845E /* TrafficWidgetEntry.swift in Sources */,
+				479F6E9DD0CBC3E9A0D84413 /* TrafficWidgetProvider.swift in Sources */,
+				C7D6C5F6BE3DCB85E51A1602 /* TrafficWidgetView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CA8D560A889AE3C8983CD6B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 199E90EBDA0B38BE832E5E52 /* BandwidthMonitorWidgetExtension */;
+			targetProxy = C0D3FB7BA2BBBBFA16676BE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		1353901C28EE1129D632506A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BandwidthMonitorWidget/BandwidthMonitorWidget.entitlements;
+				INFOPLIST_FILE = BandwidthMonitorWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.evilforbeginners.BandwidthMonitor.TrafficWidget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		5E5027B48DF33761FAA269EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -265,6 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BandwidthMonitor/BandwidthMonitor.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BandwidthMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -282,6 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BandwidthMonitor/BandwidthMonitor.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BandwidthMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -293,6 +439,22 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		A6578A505095405E1DBC5136 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BandwidthMonitorWidget/BandwidthMonitorWidget.entitlements;
+				INFOPLIST_FILE = BandwidthMonitorWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.evilforbeginners.BandwidthMonitor.TrafficWidget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		DFD14D8652A944BCB92CA4C7 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -355,6 +517,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6E0AC69C7ECF8DD16AB873E1 /* Build configuration list for PBXNativeTarget "BandwidthMonitorWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6578A505095405E1DBC5136 /* Debug */,
+				1353901C28EE1129D632506A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		82F52860500AEF5EE4FE8AA9 /* Build configuration list for PBXProject "BandwidthMonitor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

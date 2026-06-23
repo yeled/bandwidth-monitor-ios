@@ -47,8 +47,27 @@ BandwidthMonitor/
   Views/            SwiftUI screens
 ```
 
+## Lock Screen widget
+
+`BandwidthMonitorWidget` is a WidgetKit extension (`accessoryRectangular` family) showing a
+monochrome sparkline for one interface: RX plotted above the zero line, TX plotted below it, no
+color, no axes. It reads the server URL and selected interface from an App Group
+(`group.com.evilforbeginners.BandwidthMonitor`, shared via `BandwidthMonitor/Shared/Settings/AppGroup.swift`)
+so it can fetch data on its own, independent of the host app.
+
+Notes:
+
+- In Xcode, you'll likely need to set your Team on both targets and confirm the App Groups
+  capability is enabled for `group.com.evilforbeginners.BandwidthMonitor` on each (Signing &
+  Capabilities tab) before it'll build/run on device.
+- Widget timelines are refreshed by the OS on its own schedule (here requested every ~15 min) —
+  this is **not** a live view. The graph reflects whatever the server returned at the last refresh,
+  not a real-time sliding window.
+- The app calls `WidgetCenter.shared.reloadTimelines` when you change the server URL or selected
+  interface, so the widget updates promptly after a settings change even though it's otherwise on
+  a slow OS-driven cadence.
+
 ## Not yet implemented
 
-Only the Traffic tab (live rates + history graph) is scaffolded. The Go server also exposes DNS,
-WiFi, NAT, speed test, and debug data (`/api/dns`, `/api/wifi`, `/api/conntrack`, etc.) that could
-be added as further tabs following the same pattern.
+The Go server also exposes DNS, WiFi, NAT, speed test, and debug data (`/api/dns`, `/api/wifi`,
+`/api/conntrack`, etc.) that could be added as further tabs or widgets following the same pattern.

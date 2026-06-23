@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("serverURL") private var serverURL: String = ""
+    @AppStorage(SettingsKey.serverURL, store: AppGroup.defaults) private var serverURL: String = ""
     @Environment(\.dismiss) private var dismiss
     @State private var draft: String = ""
 
