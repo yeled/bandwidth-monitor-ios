@@ -17,40 +17,73 @@ struct TrafficWidgetView: View {
                     .lineLimit(1)
             }
         } else {
-            VStack(alignment: .leading, spacing: 0) {
-                Text(entry.interfaceName ?? "")
-                    .font(.caption2)
-                    .lineLimit(1)
+            VStack(alignment: .leading, spacing: 1) {
+                header
                 sparkline
             }
         }
     }
 
-    /// RX plotted above the zero line, TX plotted below it — one line, no color, just direction.
+    /// Peak rates for the window, similar to a stock widget's change line above its sparkline —
+    /// the squiggle alone is too small to make a spike's actual size legible at a glance.
+    private var header: some View {
+        HStack(spacing: 6) {
+            Text(entry.interfaceName ?? "")
+                .lineLimit(1)
+            Spacer(minLength: 0)
+            Text("↓\(ByteFormatter.bytes(entry.peakRxRate))")
+            Text("↑\(ByteFormatter.bytes(entry.peakTxRate))")
+                .foregroundStyle(.secondary)
+        }
+        .font(.system(size: 11, weight: .medium))
+        .lineLimit(1)
+        .minimumScaleFactor(0.8)
+    }
+
+    /// RX filled above the zero line, TX filled below it — one shape, no color, just direction.
+    /// Linear (not smoothed) interpolation keeps brief spikes looking like spikes rather than bumps.
     private var sparkline: some View {
         Chart {
-            RuleMark(y: .value("Zero", 0))
-                .lineStyle(StrokeStyle(lineWidth: 0.5))
-
+            ForEach(entry.points, id: \.timestamp) { point in
+                AreaMark(
+                    x: .value("Time", point.date),
+                    yStart: .value("Zero", 0),
+                    yEnd: .value("Down", point.rxRate)
+                )
+                .interpolationMethod(.linear)
+                .foregroundStyle(.primary.opacity(0.2))
+            }
             ForEach(entry.points, id: \.timestamp) { point in
                 LineMark(
                     x: .value("Time", point.date),
                     y: .value("Down", point.rxRate)
                 )
-                .interpolationMethod(.monotone)
-                .lineStyle(StrokeStyle(lineWidth: 1.5))
+                .interpolationMethod(.linear)
+                .lineStyle(StrokeStyle(lineWidth: 1.3))
                 .foregroundStyle(.primary)
             }
 
+            ForEach(entry.points, id: \.timestamp) { point in
+                AreaMark(
+                    x: .value("Time", point.date),
+                    yStart: .value("Zero", 0),
+                    yEnd: .value("Up", -point.txRate)
+                )
+                .interpolationMethod(.linear)
+                .foregroundStyle(.secondary.opacity(0.2))
+            }
             ForEach(entry.points, id: \.timestamp) { point in
                 LineMark(
                     x: .value("Time", point.date),
                     y: .value("Up", -point.txRate)
                 )
-                .interpolationMethod(.monotone)
-                .lineStyle(StrokeStyle(lineWidth: 1.5))
+                .interpolationMethod(.linear)
+                .lineStyle(StrokeStyle(lineWidth: 1.3))
                 .foregroundStyle(.secondary)
             }
+
+            RuleMark(y: .value("Zero", 0))
+                .lineStyle(StrokeStyle(lineWidth: 0.5))
         }
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)

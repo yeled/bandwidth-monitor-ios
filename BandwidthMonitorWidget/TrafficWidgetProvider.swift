@@ -45,16 +45,10 @@ struct TrafficWidgetProvider: TimelineProvider {
             }
             let cutoff = Date().addingTimeInterval(-chartWindow)
             let windowed = points.filter { $0.date >= cutoff }
-            return TrafficWidgetEntry(date: Date(), interfaceName: name, points: Self.downsample(windowed, maxPoints: maxPoints), errorMessage: nil)
+            return TrafficWidgetEntry(date: Date(), interfaceName: name, points: windowed.downsampledPreservingPeaks(maxPoints: maxPoints), errorMessage: nil)
         } catch {
             return TrafficWidgetEntry(date: Date(), interfaceName: nil, points: [], errorMessage: error.localizedDescription)
         }
-    }
-
-    private static func downsample(_ points: [HistoryPoint], maxPoints: Int) -> [HistoryPoint] {
-        guard points.count > maxPoints else { return points }
-        let stride = Swift.max(1, points.count / maxPoints)
-        return Swift.stride(from: 0, to: points.count, by: stride).map { points[$0] }
     }
 
     private static func samplePoints() -> [HistoryPoint] {

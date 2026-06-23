@@ -108,10 +108,7 @@ final class TrafficViewModel: ObservableObject {
         guard let name = selectedInterface, let points = history[name] else { return [] }
         let cutoff = Date().addingTimeInterval(-timeRange.seconds)
         let windowed = points.filter { $0.date >= cutoff }
-        guard windowed.count > maxChartPoints else { return windowed }
-
-        let stride = Swift.max(1, windowed.count / maxChartPoints)
-        return Swift.stride(from: 0, to: windowed.count, by: stride).map { windowed[$0] }
+        return windowed.downsampledPreservingPeaks(maxPoints: maxChartPoints)
     }
 
     var selectedStat: InterfaceStat? {
