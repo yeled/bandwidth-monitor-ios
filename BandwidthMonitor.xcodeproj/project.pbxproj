@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00F2919BEA5EB3BA2A3EF5A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49334065748C1158A6170B19 /* ContentView.swift */; };
+		07092A161E8C238E04FD0876 /* HistoryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D0CA764D05E8753DD4B234 /* HistoryPoint.swift */; };
+		279A8649BB3FC80053FFF2F9 /* BandwidthMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0600D61430866A01647CA12C /* BandwidthMonitorApp.swift */; };
+		6C17C05D169DF34589DCB20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8768ED223EE3703AA78447C7 /* Assets.xcassets */; };
+		7AB6FA247B4F198E33E194FF /* TrafficChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE6F18BE6080C1A64EF78DA /* TrafficChartView.swift */; };
+		81951984A2943AD4AA1A6B62 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D55C7B06131B152FAA3B9F1 /* APIClient.swift */; };
+		95248B3B8810A9C35D89FB1B /* TrafficViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACF2AD0CE1B0551A7B7440F /* TrafficViewModel.swift */; };
+		9CB9DCEF352C02872D1D7DF4 /* InterfaceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E07872E12AB4027F588B8 /* InterfaceRowView.swift */; };
+		ADBEEB335C6103099B0901FD /* InterfaceStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED79A2179959CD8251548620 /* InterfaceStat.swift */; };
+		DF31782CE503430F8F8BF1A1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1521E83C5877E217D289214 /* SettingsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0600D61430866A01647CA12C /* BandwidthMonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandwidthMonitorApp.swift; sourceTree = "<group>"; };
+		0C56D8BB31352FE7628FB74B /* BandwidthMonitor.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BandwidthMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49334065748C1158A6170B19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4ACF2AD0CE1B0551A7B7440F /* TrafficViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficViewModel.swift; sourceTree = "<group>"; };
+		4F508350C548621FA369219F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5BE6F18BE6080C1A64EF78DA /* TrafficChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficChartView.swift; sourceTree = "<group>"; };
+		82D0CA764D05E8753DD4B234 /* HistoryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPoint.swift; sourceTree = "<group>"; };
+		8768ED223EE3703AA78447C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8D55C7B06131B152FAA3B9F1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		B69E07872E12AB4027F588B8 /* InterfaceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceRowView.swift; sourceTree = "<group>"; };
+		C1521E83C5877E217D289214 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		ED79A2179959CD8251548620 /* InterfaceStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceStat.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		06B8AF16B9281B4EF7C4DBB8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				49334065748C1158A6170B19 /* ContentView.swift */,
+				B69E07872E12AB4027F588B8 /* InterfaceRowView.swift */,
+				C1521E83C5877E217D289214 /* SettingsView.swift */,
+				5BE6F18BE6080C1A64EF78DA /* TrafficChartView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0EC3240D7584A9A45005D590 /* BandwidthMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				8768ED223EE3703AA78447C7 /* Assets.xcassets */,
+				4F508350C548621FA369219F /* Info.plist */,
+				96300D1FC2A6E629B01FD84D /* App */,
+				4B5F1F7552893B0519A85A54 /* Models */,
+				D91699E7E6F2044C4A7007DA /* Networking */,
+				F2AE853155DD05426CEBC5FB /* ViewModels */,
+				06B8AF16B9281B4EF7C4DBB8 /* Views */,
+			);
+			path = BandwidthMonitor;
+			sourceTree = "<group>";
+		};
+		4B5F1F7552893B0519A85A54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				82D0CA764D05E8753DD4B234 /* HistoryPoint.swift */,
+				ED79A2179959CD8251548620 /* InterfaceStat.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		771F2E94CF8CA859BCBE611C = {
+			isa = PBXGroup;
+			children = (
+				0EC3240D7584A9A45005D590 /* BandwidthMonitor */,
+				D11160709C7FEAE15FA83B44 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		96300D1FC2A6E629B01FD84D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0600D61430866A01647CA12C /* BandwidthMonitorApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D11160709C7FEAE15FA83B44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C56D8BB31352FE7628FB74B /* BandwidthMonitor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D91699E7E6F2044C4A7007DA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8D55C7B06131B152FAA3B9F1 /* APIClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		F2AE853155DD05426CEBC5FB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4ACF2AD0CE1B0551A7B7440F /* TrafficViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B37F0F8AEA25CA579D45B435 /* BandwidthMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF25D2A429C7D1FAF92447B4 /* Build configuration list for PBXNativeTarget "BandwidthMonitor" */;
+			buildPhases = (
+				1FFC159CB6642A29A2E64E7B /* Sources */,
+				7885ADC82C5C9407A2F3674D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BandwidthMonitor;
+			packageProductDependencies = (
+			);
+			productName = BandwidthMonitor;
+			productReference = 0C56D8BB31352FE7628FB74B /* BandwidthMonitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1D09C42502736A8FD71573AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B37F0F8AEA25CA579D45B435 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 82F52860500AEF5EE4FE8AA9 /* Build configuration list for PBXProject "BandwidthMonitor" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 771F2E94CF8CA859BCBE611C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D11160709C7FEAE15FA83B44 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B37F0F8AEA25CA579D45B435 /* BandwidthMonitor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7885ADC82C5C9407A2F3674D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C17C05D169DF34589DCB20C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1FFC159CB6642A29A2E64E7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81951984A2943AD4AA1A6B62 /* APIClient.swift in Sources */,
+				279A8649BB3FC80053FFF2F9 /* BandwidthMonitorApp.swift in Sources */,
+				00F2919BEA5EB3BA2A3EF5A7 /* ContentView.swift in Sources */,
+				07092A161E8C238E04FD0876 /* HistoryPoint.swift in Sources */,
+				9CB9DCEF352C02872D1D7DF4 /* InterfaceRowView.swift in Sources */,
+				ADBEEB335C6103099B0901FD /* InterfaceStat.swift in Sources */,
+				DF31782CE503430F8F8BF1A1 /* SettingsView.swift in Sources */,
+				7AB6FA247B4F198E33E194FF /* TrafficChartView.swift in Sources */,
+				95248B3B8810A9C35D89FB1B /* TrafficViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5E5027B48DF33761FAA269EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7D7CAAD85936F9829ADB8374 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = BandwidthMonitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.evilforbeginners.BandwidthMonitor;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		93B7B902CA92B97301CDF887 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = BandwidthMonitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.evilforbeginners.BandwidthMonitor;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DFD14D8652A944BCB92CA4C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		82F52860500AEF5EE4FE8AA9 /* Build configuration list for PBXProject "BandwidthMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E5027B48DF33761FAA269EB /* Debug */,
+				DFD14D8652A944BCB92CA4C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DF25D2A429C7D1FAF92447B4 /* Build configuration list for PBXNativeTarget "BandwidthMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D7CAAD85936F9829ADB8374 /* Debug */,
+				93B7B902CA92B97301CDF887 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1D09C42502736A8FD71573AC /* Project object */;
+}
