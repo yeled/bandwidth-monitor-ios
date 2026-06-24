@@ -43,7 +43,7 @@ struct TrafficWidgetProvider: TimelineProvider {
         guard let serverURL = defaults.string(forKey: SettingsKey.serverURL), !serverURL.isEmpty else {
             return TrafficWidgetEntry(date: Date(), interfaceName: nil, points: [], errorMessage: "No server configured")
         }
-        guard let client = APIClient(baseURLString: serverURL) else {
+        guard let client = APIClient(baseURLString: serverURL, timeout: 8) else {
             return TrafficWidgetEntry(date: Date(), interfaceName: nil, points: [], errorMessage: "Invalid server URL")
         }
 

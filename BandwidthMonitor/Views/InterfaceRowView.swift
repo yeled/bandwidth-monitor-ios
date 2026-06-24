@@ -36,7 +36,7 @@ struct InterfaceRowView: View {
         HStack(spacing: 4) {
             Image(systemName: systemImage)
                 .foregroundStyle(color)
-            Text(ByteFormatter.rate(value))
+            Text(BitRateFormatter.string(fromBytesPerSecond: value))
         }
     }
 }

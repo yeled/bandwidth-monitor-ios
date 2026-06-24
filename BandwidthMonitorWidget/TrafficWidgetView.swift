@@ -31,13 +31,13 @@ struct TrafficWidgetView: View {
             Text(entry.interfaceName ?? "")
                 .lineLimit(1)
             Spacer(minLength: 0)
-            Text("↓\(ByteFormatter.bytes(entry.peakRxRate))")
-            Text("↑\(ByteFormatter.bytes(entry.peakTxRate))")
+            Text("↓\(BitRateFormatter.string(fromBytesPerSecond: entry.peakRxRate))")
+            Text("↑\(BitRateFormatter.string(fromBytesPerSecond: entry.peakTxRate))")
                 .foregroundStyle(.secondary)
         }
         .font(.system(size: 11, weight: .medium))
         .lineLimit(1)
-        .minimumScaleFactor(0.8)
+        .minimumScaleFactor(0.6)
     }
 
     /// RX filled above the zero line, TX filled below it — one shape, no color, just direction.
@@ -53,10 +53,13 @@ struct TrafficWidgetView: View {
                 .interpolationMethod(.linear)
                 .foregroundStyle(.primary.opacity(0.2))
             }
+            // Explicit `series:` so the download and upload lines aren't merged into one series,
+            // which would draw a stray line connecting the two halves across the chart.
             ForEach(entry.points, id: \.timestamp) { point in
                 LineMark(
                     x: .value("Time", point.date),
-                    y: .value("Down", point.rxRate)
+                    y: .value("Down", point.rxRate),
+                    series: .value("Direction", "Download")
                 )
                 .interpolationMethod(.linear)
                 .lineStyle(StrokeStyle(lineWidth: 1.3))
@@ -75,7 +78,8 @@ struct TrafficWidgetView: View {
             ForEach(entry.points, id: \.timestamp) { point in
                 LineMark(
                     x: .value("Time", point.date),
-                    y: .value("Up", -point.txRate)
+                    y: .value("Up", -point.txRate),
+                    series: .value("Direction", "Upload")
                 )
                 .interpolationMethod(.linear)
                 .lineStyle(StrokeStyle(lineWidth: 1.3))

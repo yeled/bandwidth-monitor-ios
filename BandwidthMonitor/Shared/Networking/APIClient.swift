@@ -19,13 +19,22 @@ enum APIError: Error, LocalizedError {
 /// only uses the two traffic endpoints needed for the live/1h/24h graphs.
 struct APIClient {
     var baseURL: URL
+    private let session: URLSession
 
-    init?(baseURLString: String) {
+    /// - Parameter timeout: per-request timeout. The host app fetches the full 24h history (a large
+    ///   response) in the foreground with plenty of time, so it wants a generous value; the widget
+    ///   extension's fallback fetch wants a short one so it fails fast rather than being suspended
+    ///   mid-request and surfacing a misleading "offline" error.
+    init?(baseURLString: String, timeout: TimeInterval = 30) {
         var s = baseURLString.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !s.isEmpty else { return nil }
         if !s.contains("://") { s = "http://" + s }
         guard let url = URL(string: s) else { return nil }
         self.baseURL = url
+
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = timeout
+        self.session = URLSession(configuration: config)
     }
 
     func fetchInterfaces() async throws -> [InterfaceStat] {
@@ -36,18 +45,9 @@ struct APIClient {
         try await get(InterfaceHistory.self, path: "/api/interfaces/history")
     }
 
-    /// Short timeout so a slow/huge response fails fast and predictably — important for the
-    /// widget extension, which has a much tighter execution budget than the host app and can be
-    /// suspended mid-request, surfacing as a misleading "offline" error rather than a clean timeout.
-    private static let session: URLSession = {
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 8
-        return URLSession(configuration: config)
-    }()
-
     private func get<T: Decodable>(_ type: T.Type, path: String) async throws -> T {
         let url = baseURL.appendingPathComponent(path)
-        let (data, response) = try await Self.session.data(from: url)
+        let (data, response) = try await session.data(from: url)
         if let http = response as? HTTPURLResponse, !(200..<300).contains(http.statusCode) {
             throw APIError.badStatus(http.statusCode)
         }
