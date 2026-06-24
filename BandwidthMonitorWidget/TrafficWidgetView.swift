@@ -44,51 +44,55 @@ struct TrafficWidgetView: View {
     /// Linear (not smoothed) interpolation keeps brief spikes looking like spikes rather than bumps.
     private var sparkline: some View {
         Chart {
+            // Group every mark into a Download/Upload series via foregroundStyle(by:). Without it,
+            // Charts merges the two area marks into a single path that crosses zero and floods one
+            // shade over the other when the last datapoint isn't zero (and likewise connects the
+            // two lines with a stray segment).
             ForEach(entry.points, id: \.timestamp) { point in
                 AreaMark(
                     x: .value("Time", point.date),
-                    yStart: .value("Zero", 0),
-                    yEnd: .value("Down", point.rxRate)
+                    yStart: .value("Rate", 0),
+                    yEnd: .value("Rate", point.rxRate)
                 )
                 .interpolationMethod(.linear)
-                .foregroundStyle(.primary.opacity(0.2))
+                .foregroundStyle(by: .value("Direction", "Download"))
+                .opacity(0.2)
             }
-            // Explicit `series:` so the download and upload lines aren't merged into one series,
-            // which would draw a stray line connecting the two halves across the chart.
+            ForEach(entry.points, id: \.timestamp) { point in
+                AreaMark(
+                    x: .value("Time", point.date),
+                    yStart: .value("Rate", 0),
+                    yEnd: .value("Rate", -point.txRate)
+                )
+                .interpolationMethod(.linear)
+                .foregroundStyle(by: .value("Direction", "Upload"))
+                .opacity(0.2)
+            }
             ForEach(entry.points, id: \.timestamp) { point in
                 LineMark(
                     x: .value("Time", point.date),
-                    y: .value("Down", point.rxRate),
+                    y: .value("Rate", point.rxRate),
                     series: .value("Direction", "Download")
                 )
                 .interpolationMethod(.linear)
                 .lineStyle(StrokeStyle(lineWidth: 1.3))
-                .foregroundStyle(.primary)
-            }
-
-            ForEach(entry.points, id: \.timestamp) { point in
-                AreaMark(
-                    x: .value("Time", point.date),
-                    yStart: .value("Zero", 0),
-                    yEnd: .value("Up", -point.txRate)
-                )
-                .interpolationMethod(.linear)
-                .foregroundStyle(.secondary.opacity(0.2))
+                .foregroundStyle(by: .value("Direction", "Download"))
             }
             ForEach(entry.points, id: \.timestamp) { point in
                 LineMark(
                     x: .value("Time", point.date),
-                    y: .value("Up", -point.txRate),
+                    y: .value("Rate", -point.txRate),
                     series: .value("Direction", "Upload")
                 )
                 .interpolationMethod(.linear)
                 .lineStyle(StrokeStyle(lineWidth: 1.3))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(by: .value("Direction", "Upload"))
             }
 
-            RuleMark(y: .value("Zero", 0))
+            RuleMark(y: .value("Rate", 0))
                 .lineStyle(StrokeStyle(lineWidth: 0.5))
         }
+        .chartForegroundStyleScale(["Download": Color.primary, "Upload": Color.secondary])
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .chartLegend(.hidden)

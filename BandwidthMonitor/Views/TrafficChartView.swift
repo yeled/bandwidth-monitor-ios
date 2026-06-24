@@ -24,25 +24,30 @@ struct TrafficChartView: View {
         Chart {
                 // Mirrored around zero like the Lock Screen widget: download above the line,
                 // upload below it. Plotted in Mbps (decimal bits) to match the rest of the UI.
-                // Each line gets an explicit `series:` so Charts doesn't merge them into one
-                // series — which would both connect them with a stray line and paint them one colour.
+                //
+                // Every mark is grouped into a "Download"/"Upload" series via foregroundStyle(by:).
+                // Without that, Charts merges the two area marks into a single filled path that
+                // crosses the zero line and floods one colour over the other whenever the last
+                // datapoint isn't zero — likewise for the lines.
                 ForEach(points, id: \.timestamp) { point in
                     AreaMark(
                         x: .value("Time", point.date),
-                        yStart: .value("Zero", 0),
+                        yStart: .value("Mbps", 0),
                         yEnd: .value("Mbps", BitRateFormatter.mbps(fromBytesPerSecond: point.rxRate))
                     )
-                    .foregroundStyle(Color.blue.opacity(0.15))
+                    .foregroundStyle(by: .value("Direction", "Download"))
                     .interpolationMethod(.monotone)
+                    .opacity(0.15)
                 }
                 ForEach(points, id: \.timestamp) { point in
                     AreaMark(
                         x: .value("Time", point.date),
-                        yStart: .value("Zero", 0),
+                        yStart: .value("Mbps", 0),
                         yEnd: .value("Mbps", -BitRateFormatter.mbps(fromBytesPerSecond: point.txRate))
                     )
-                    .foregroundStyle(Color.orange.opacity(0.15))
+                    .foregroundStyle(by: .value("Direction", "Upload"))
                     .interpolationMethod(.monotone)
+                    .opacity(0.15)
                 }
                 ForEach(points, id: \.timestamp) { point in
                     LineMark(
@@ -50,7 +55,7 @@ struct TrafficChartView: View {
                         y: .value("Mbps", BitRateFormatter.mbps(fromBytesPerSecond: point.rxRate)),
                         series: .value("Direction", "Download")
                     )
-                    .foregroundStyle(Color.blue)
+                    .foregroundStyle(by: .value("Direction", "Download"))
                     .interpolationMethod(.monotone)
                 }
                 ForEach(points, id: \.timestamp) { point in
@@ -59,13 +64,14 @@ struct TrafficChartView: View {
                         y: .value("Mbps", -BitRateFormatter.mbps(fromBytesPerSecond: point.txRate)),
                         series: .value("Direction", "Upload")
                     )
-                    .foregroundStyle(Color.orange)
+                    .foregroundStyle(by: .value("Direction", "Upload"))
                     .interpolationMethod(.monotone)
                 }
                 RuleMark(y: .value("Mbps", 0))
                     .lineStyle(StrokeStyle(lineWidth: 0.5))
                     .foregroundStyle(.secondary)
             }
+            .chartForegroundStyleScale(["Download": Color.blue, "Upload": Color.orange])
             .chartYAxisLabel("Mbps")
             .chartYAxis {
                 AxisMarks { value in
