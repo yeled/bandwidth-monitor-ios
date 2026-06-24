@@ -39,29 +39,11 @@ struct TrafficChartView: View {
         }
     }
     
-    @ViewBuilder
     private var emptyStateView: some View {
-        if #available(iOS 17.0, *) {
-            ContentUnavailableView(
-                "No History Yet",
-                systemImage: "chart.line.uptrend.xyaxis",
-                description: Text("Waiting for traffic samples from the server.")
-            )
-        } else {
-            VStack(spacing: 12) {
-                Image(systemName: "chart.line.uptrend.xyaxis")
-                    .font(.system(size: 48))
-                    .foregroundStyle(.secondary)
-                
-                Text("No History Yet")
-                    .font(.headline)
-                
-                Text("Waiting for traffic samples from the server.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-            .padding()
-        }
+        ContentUnavailableView(
+            "No History Yet",
+            systemImage: "chart.line.uptrend.xyaxis",
+            description: Text("Waiting for traffic samples from the server.")
+        )
     }
 }

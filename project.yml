@@ -2,12 +2,12 @@ name: BandwidthMonitor
 options:
   bundleIdPrefix: com.evilforbeginners
   deploymentTarget:
-    iOS: "16.0"
+    iOS: "17.0"
 
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    DEVELOPMENT_TEAM: ""
+    DEVELOPMENT_TEAM: SA2SS4242K
     CODE_SIGN_STYLE: Automatic
 
 targets:

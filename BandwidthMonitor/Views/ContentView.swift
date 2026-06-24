@@ -10,15 +10,11 @@ struct ContentView: View {
         NavigationStack {
             Group {
                 if serverURL.isEmpty {
-                    if #available(iOS 17.0, *) {
-                        ContentUnavailableView(
-                            "No Server Configured",
-                            systemImage: "server.rack",
-                            description: Text("Add your bandwidth-monitor server address in Settings.")
-                        )
-                    } else {
-                        // Fallback on earlier versions
-                    }
+                    ContentUnavailableView(
+                        "No Server Configured",
+                        systemImage: "server.rack",
+                        description: Text("Add your bandwidth-monitor server address in Settings.")
+                    )
                 } else {
                     trafficList
                 }
