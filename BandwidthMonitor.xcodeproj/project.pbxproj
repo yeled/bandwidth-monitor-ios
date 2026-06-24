@@ -250,11 +250,9 @@
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					199E90EBDA0B38BE832E5E52 = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					B37F0F8AEA25CA579D45B435 = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -341,6 +339,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = BandwidthMonitorWidget/BandwidthMonitorWidget.entitlements;
+				DEVELOPMENT_TEAM = SA2SS4242K;
 				INFOPLIST_FILE = BandwidthMonitorWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -427,6 +426,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BandwidthMonitor/BandwidthMonitor.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = SA2SS4242K;
 				INFOPLIST_FILE = BandwidthMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -445,6 +445,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BandwidthMonitor/BandwidthMonitor.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = SA2SS4242K;
 				INFOPLIST_FILE = BandwidthMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -460,6 +461,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = BandwidthMonitorWidget/BandwidthMonitorWidget.entitlements;
+				DEVELOPMENT_TEAM = SA2SS4242K;
 				INFOPLIST_FILE = BandwidthMonitorWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
