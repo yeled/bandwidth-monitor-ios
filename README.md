@@ -39,6 +39,21 @@ If you add/remove source files or change build settings, edit `project.yml` and 
 xcodegen generate
 ```
 
+## Releasing
+
+The version lives in one place — `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` in
+`project.yml`; both Info.plists reference those build settings. `scripts/release.sh` automates the
+bump → regenerate → commit → tag → GitHub Release flow:
+
+```bash
+scripts/release.sh 0.9.1     # cut a release: set marketing version, bump build, tag v0.9.1, publish
+scripts/release.sh bump-build # just bump the build number for a new TestFlight/App Store upload
+scripts/release.sh 1.0.0 --no-build   # skip the compile check
+```
+
+It refuses to run on a dirty tree or an existing tag, and compile-checks before tagging (unless
+`--no-build`). Needs `xcodegen` and an authenticated `gh`.
+
 ## How it talks to the server
 
 It polls two endpoints on the Go server (see that repo's README "API Endpoints" section for the
