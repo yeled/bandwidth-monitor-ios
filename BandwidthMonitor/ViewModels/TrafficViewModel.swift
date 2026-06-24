@@ -1,4 +1,5 @@
 import Foundation
+import Observation
 import WidgetKit
 
 enum TimeRange: String, CaseIterable, Identifiable {
@@ -16,10 +17,11 @@ enum TimeRange: String, CaseIterable, Identifiable {
 }
 
 @MainActor
-final class TrafficViewModel: ObservableObject {
-    @Published var interfaces: [InterfaceStat] = []
-    @Published var history: InterfaceHistory = [:]
-    @Published var selectedInterface: String? {
+@Observable
+final class TrafficViewModel {
+    var interfaces: [InterfaceStat] = []
+    var history: InterfaceHistory = [:]
+    var selectedInterface: String? {
         didSet {
             guard selectedInterface != oldValue else { return }
             AppGroup.defaults.set(selectedInterface, forKey: SettingsKey.selectedInterface)
@@ -27,14 +29,14 @@ final class TrafficViewModel: ObservableObject {
             WidgetCenter.shared.reloadTimelines(ofKind: TrafficWidgetKind.id)
         }
     }
-    @Published var timeRange: TimeRange = .oneHour
-    @Published var errorMessage: String?
-    @Published var isLoading = false
+    var timeRange: TimeRange = .oneHour
+    var errorMessage: String?
+    var isLoading = false
 
-    private var refreshTask: Task<Void, Never>?
+    @ObservationIgnored private var refreshTask: Task<Void, Never>?
     private let liveInterval: Duration = .seconds(2)
     private let historyRefreshEveryNTicks = 8 // ~every 16s, since live polls every 2s
-    private var tickCount = 0
+    @ObservationIgnored private var tickCount = 0
 
     /// Caps points handed to the chart so a 24h-at-1Hz series doesn't render tens of thousands of marks.
     private let maxChartPoints = 360

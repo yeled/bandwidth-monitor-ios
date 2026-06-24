@@ -3,7 +3,7 @@ import WidgetKit
 
 struct ContentView: View {
     @AppStorage(SettingsKey.serverURL, store: AppGroup.defaults) private var serverURL: String = ""
-    @StateObject private var viewModel = TrafficViewModel()
+    @State private var viewModel = TrafficViewModel()
     @State private var showSettings = false
 
     var body: some View {
