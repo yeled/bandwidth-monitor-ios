@@ -9,6 +9,10 @@ settings:
     SWIFT_VERSION: "5.0"
     DEVELOPMENT_TEAM: SA2SS4242K
     CODE_SIGN_STYLE: Automatic
+    # Single source of truth for both targets. Bump MARKETING_VERSION for a user-facing
+    # release; bump CURRENT_PROJECT_VERSION for every TestFlight/App Store upload.
+    MARKETING_VERSION: "0.9.0"
+    CURRENT_PROJECT_VERSION: "1"
 
 targets:
   BandwidthMonitor:
@@ -19,6 +23,8 @@ targets:
     info:
       path: BandwidthMonitor/Info.plist
       properties:
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         UILaunchScreen: {}
         NSLocalNetworkUsageDescription: "Bandwidth Monitor connects to your router on the local network to read traffic stats."
         NSAppTransportSecurity:
@@ -47,6 +53,8 @@ targets:
     info:
       path: BandwidthMonitorWidget/Info.plist
       properties:
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         CFBundleDisplayName: Traffic Widget
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
