@@ -1,11 +1,27 @@
 # Bandwidth Monitor (iOS)
 
 SwiftUI client for [awlx/bandwidth-monitor](https://github.com/awlx/bandwidth-monitor), showing
-live interface rates plus 1h / 24h traffic graphs.
+live interface rates plus 1h / 24h traffic graphs, with a Lock Screen widget.
+
+## Screenshots
+
+<table>
+  <tr>
+    <th>App (Traffic)</th>
+    <th>Lock Screen widget</th>
+  </tr>
+  <tr>
+    <td><img src="docs/app-traffic.png" width="280" alt="Traffic chart in the app, download above the zero line and upload below, in Mbps" /></td>
+    <td><img src="docs/lockscreen-widget.png" width="280" alt="Lock Screen widget showing a monochrome traffic sparkline" /></td>
+  </tr>
+</table>
+
+The chart mirrors around zero — download above the line, upload below — in Mbps (decimal bits).
+The Lock Screen widget shows the same shape as a monochrome sparkline for the selected interface.
 
 ## Requirements
 
-- Xcode 16+ (iOS 16 deployment target, uses Swift Charts)
+- Xcode 16+ (iOS 17 deployment target, uses Swift Charts)
 - A running bandwidth-monitor instance reachable on your network (e.g. `http://192.168.1.1:8080`)
 
 ## Getting started
@@ -41,10 +57,14 @@ triggers iOS's local-network permission prompt (`NSLocalNetworkUsageDescription`
 ```
 BandwidthMonitor/
   App/             App entry point
-  Models/          Decodable types mirroring the Go server's JSON
-  Networking/       APIClient (URLSession-based)
-  ViewModels/       Polling + chart-windowing logic
-  Views/            SwiftUI screens
+  Shared/          Code shared with the widget extension:
+    Models/        Decodable types mirroring the Go server's JSON
+    Networking/    APIClient (URLSession-based)
+    Settings/      App Group accessors + widget snapshot cache
+    Utilities/     BitRateFormatter (Mbps/kbps)
+  ViewModels/      Polling + chart-windowing logic
+  Views/           SwiftUI screens
+BandwidthMonitorWidget/   WidgetKit extension (Lock Screen sparkline)
 ```
 
 ## Lock Screen widget
