@@ -23,6 +23,7 @@ final class TrafficViewModel: ObservableObject {
         didSet {
             guard selectedInterface != oldValue else { return }
             AppGroup.defaults.set(selectedInterface, forKey: SettingsKey.selectedInterface)
+            cacheWidgetSnapshot()
             WidgetCenter.shared.reloadTimelines(ofKind: TrafficWidgetKind.id)
         }
     }
@@ -37,6 +38,9 @@ final class TrafficViewModel: ObservableObject {
 
     /// Caps points handed to the chart so a 24h-at-1Hz series doesn't render tens of thousands of marks.
     private let maxChartPoints = 360
+
+    private let widgetSnapshotWindow: TimeInterval = 60 * 60
+    private let widgetSnapshotMaxPoints = 60
 
     func start(baseURLString: String) {
         stop()
@@ -98,9 +102,21 @@ final class TrafficViewModel: ObservableObject {
         do {
             history = try await client.fetchHistory()
             errorMessage = nil
+            cacheWidgetSnapshot()
+            WidgetCenter.shared.reloadTimelines(ofKind: TrafficWidgetKind.id)
         } catch {
             errorMessage = error.localizedDescription
         }
+    }
+
+    /// Writes a small, already-downsampled slice of the selected interface's last hour into the
+    /// App Group so the widget can render without making its own (budget-constrained) network call.
+    private func cacheWidgetSnapshot() {
+        guard let name = selectedInterface, let points = history[name] else { return }
+        let cutoff = Date().addingTimeInterval(-widgetSnapshotWindow)
+        let windowed = points.filter { $0.date >= cutoff }
+        let downsampled = windowed.downsampledPreservingPeaks(maxPoints: widgetSnapshotMaxPoints)
+        AppGroup.saveWidgetSnapshot(WidgetSnapshot(interfaceName: name, points: downsampled, cachedAt: Date()))
     }
 
     /// Points for the selected interface within the selected time range, downsampled for chart rendering.

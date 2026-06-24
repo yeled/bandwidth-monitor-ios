@@ -29,6 +29,17 @@ struct TrafficWidgetProvider: TimelineProvider {
 
     private func currentEntry() async -> TrafficWidgetEntry {
         let defaults = AppGroup.defaults
+        let preferredInterface = defaults.string(forKey: SettingsKey.selectedInterface)
+
+        // The host app caches a small slice of the selected interface's last hour every time it
+        // refreshes. Prefer that — it's instant and avoids the widget extension making its own
+        // network call against an endpoint that returns a multi-megabyte 24h history blob, which
+        // risks running past the extension's execution budget.
+        if let cached = AppGroup.loadWidgetSnapshot(),
+           preferredInterface == nil || cached.interfaceName == preferredInterface {
+            return TrafficWidgetEntry(date: Date(), interfaceName: cached.interfaceName, points: cached.points, errorMessage: nil)
+        }
+
         guard let serverURL = defaults.string(forKey: SettingsKey.serverURL), !serverURL.isEmpty else {
             return TrafficWidgetEntry(date: Date(), interfaceName: nil, points: [], errorMessage: "No server configured")
         }
@@ -38,8 +49,7 @@ struct TrafficWidgetProvider: TimelineProvider {
 
         do {
             let history = try await client.fetchHistory()
-            let preferred = defaults.string(forKey: SettingsKey.selectedInterface)
-            let name = preferred.flatMap { history[$0] != nil ? $0 : nil } ?? history.keys.sorted().first
+            let name = preferredInterface.flatMap { history[$0] != nil ? $0 : nil } ?? history.keys.sorted().first
             guard let name, let points = history[name] else {
                 return TrafficWidgetEntry(date: Date(), interfaceName: name, points: [], errorMessage: "No data yet")
             }

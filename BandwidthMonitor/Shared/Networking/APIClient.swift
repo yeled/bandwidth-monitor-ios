@@ -36,9 +36,18 @@ struct APIClient {
         try await get(InterfaceHistory.self, path: "/api/interfaces/history")
     }
 
+    /// Short timeout so a slow/huge response fails fast and predictably — important for the
+    /// widget extension, which has a much tighter execution budget than the host app and can be
+    /// suspended mid-request, surfacing as a misleading "offline" error rather than a clean timeout.
+    private static let session: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 8
+        return URLSession(configuration: config)
+    }()
+
     private func get<T: Decodable>(_ type: T.Type, path: String) async throws -> T {
         let url = baseURL.appendingPathComponent(path)
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let (data, response) = try await Self.session.data(from: url)
         if let http = response as? HTTPURLResponse, !(200..<300).contains(http.statusCode) {
             throw APIError.badStatus(http.statusCode)
         }

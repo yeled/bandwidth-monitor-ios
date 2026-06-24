@@ -18,6 +18,7 @@
 		95248B3B8810A9C35D89FB1B /* TrafficViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACF2AD0CE1B0551A7B7440F /* TrafficViewModel.swift */; };
 		9A8D87CBC8ACE09CA2B8DF7C /* InterfaceStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ED91D2C0BF780BA7BFC9E /* InterfaceStat.swift */; };
 		9CB9DCEF352C02872D1D7DF4 /* InterfaceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E07872E12AB4027F588B8 /* InterfaceRowView.swift */; };
+		9E53C8ED10A6EB86DD8A5BA3 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2BE6F3991E98470C56CBF /* WidgetSnapshot.swift */; };
 		A5C8BE902B0194C9C70C591D /* HistoryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41B818C518FA4701215D5E3 /* HistoryPoint.swift */; };
 		AA04FD071C9EDF4051FB9AC9 /* ByteFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF90C3E48BBFB71F472AB94B /* ByteFormatter.swift */; };
 		C7D6C5F6BE3DCB85E51A1602 /* TrafficWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A5AFBCD8C9D51EB7BC2A6 /* TrafficWidgetView.swift */; };
@@ -25,6 +26,7 @@
 		D06A66B8CD01F6367856B5DF /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21AD777356E0FB8977E3C8 /* APIClient.swift */; };
 		DB5D907116774FC5F329B62D /* BandwidthMonitorWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5E2FEF1CEAEE2E15DDB7AD4A /* BandwidthMonitorWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DBCE5E255F9757837DAD1056 /* ByteFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF90C3E48BBFB71F472AB94B /* ByteFormatter.swift */; };
+		DCCDA3FE01BEF3773D24A050 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2BE6F3991E98470C56CBF /* WidgetSnapshot.swift */; };
 		DE48FC8BA8CF62E0E8CA9B52 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21AD777356E0FB8977E3C8 /* APIClient.swift */; };
 		DF146B3DDE94388AFE1D7942 /* InterfaceStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505ED91D2C0BF780BA7BFC9E /* InterfaceStat.swift */; };
 		DF31782CE503430F8F8BF1A1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1521E83C5877E217D289214 /* SettingsView.swift */; };
@@ -70,6 +72,7 @@
 		7072ECA56E71F95F511DC463 /* BandwidthMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BandwidthMonitor.entitlements; sourceTree = "<group>"; };
 		79FED34CB681E23AEB57F638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8768ED223EE3703AA78447C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		90F2BE6F3991E98470C56CBF /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSnapshot.swift; sourceTree = "<group>"; };
 		B69E07872E12AB4027F588B8 /* InterfaceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceRowView.swift; sourceTree = "<group>"; };
 		BD9296780A7389B7812E950F /* BandwidthMonitorWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandwidthMonitorWidgetBundle.swift; sourceTree = "<group>"; };
 		BF7A5AFBCD8C9D51EB7BC2A6 /* TrafficWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficWidgetView.swift; sourceTree = "<group>"; };
@@ -129,6 +132,7 @@
 			children = (
 				D41B818C518FA4701215D5E3 /* HistoryPoint.swift */,
 				505ED91D2C0BF780BA7BFC9E /* InterfaceStat.swift */,
+				90F2BE6F3991E98470C56CBF /* WidgetSnapshot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +310,7 @@
 				DF31782CE503430F8F8BF1A1 /* SettingsView.swift in Sources */,
 				7AB6FA247B4F198E33E194FF /* TrafficChartView.swift in Sources */,
 				95248B3B8810A9C35D89FB1B /* TrafficViewModel.swift in Sources */,
+				9E53C8ED10A6EB86DD8A5BA3 /* WidgetSnapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +328,7 @@
 				798468EA50CE3FF2AAA2845E /* TrafficWidgetEntry.swift in Sources */,
 				479F6E9DD0CBC3E9A0D84413 /* TrafficWidgetProvider.swift in Sources */,
 				C7D6C5F6BE3DCB85E51A1602 /* TrafficWidgetView.swift in Sources */,
+				DCCDA3FE01BEF3773D24A050 /* WidgetSnapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
