@@ -26,6 +26,10 @@ targets:
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         UILaunchScreen: {}
+        # Portrait-only. Lives here (not hand-edited into the generated Info.plist) so it
+        # survives `xcodegen generate`.
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
         NSLocalNetworkUsageDescription: "Bandwidth Monitor connects to your router on the local network to read traffic stats."
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: true
