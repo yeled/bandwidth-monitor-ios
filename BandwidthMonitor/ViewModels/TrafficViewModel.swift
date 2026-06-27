@@ -38,6 +38,9 @@ final class TrafficViewModel {
     /// silently swapping the last hour out from under you.
     var isReconcilingHistory = false
 
+    /// Whether the Lock Screen / Dynamic Island Live Activity is currently running.
+    var isLiveActivityOn = false
+
     @ObservationIgnored private var refreshTask: Task<Void, Never>?
     private let liveInterval: Duration = .seconds(2)
     private let historyRefreshEveryNTicks = 8 // ~every 16s, since live polls every 2s
@@ -49,11 +52,30 @@ final class TrafficViewModel {
     private let widgetSnapshotWindow: TimeInterval = 60 * 60
     private let widgetSnapshotMaxPoints = 60
 
+    @ObservationIgnored private let liveActivity = LiveActivityController()
+    private let liveActivityWindow: TimeInterval = 60 * 60
+
     func start(baseURLString: String) {
         stop()
         beginReconcile()
+        liveActivity.adopt()
+        isLiveActivityOn = liveActivity.isRunning
         refreshTask = Task {
             await refreshLoop(baseURLString: baseURLString)
+        }
+    }
+
+    /// Start or stop the Lock Screen / Dynamic Island Live Activity.
+    func toggleLiveActivity() {
+        if liveActivity.isRunning {
+            isLiveActivityOn = false
+            Task { await liveActivity.stop() }
+        } else if let state = liveState() {
+            liveActivity.start(state)
+            isLiveActivityOn = liveActivity.isRunning
+            if !isLiveActivityOn {
+                errorMessage = "Enable Live Activities for Bandwidth Monitor in Settings to use this."
+            }
         }
     }
 
@@ -108,9 +130,31 @@ final class TrafficViewModel {
                     ?? interfaces.first?.name
             }
             errorMessage = nil
+            await pushLiveActivityUpdate()
         } catch {
             errorMessage = error.localizedDescription
         }
+    }
+
+    /// Current Live Activity content: the recent window plus a synthetic "now" sample carrying the
+    /// live rate, so the marked latest point reflects the current rate rather than the (up to ~16s
+    /// old) tail of the history series.
+    private func liveState() -> BandwidthActivityAttributes.ContentState? {
+        guard let name = selectedInterface else { return nil }
+        let stat = interfaces.first { $0.name == name }
+        let rx = stat?.rxRate ?? 0
+        let tx = stat?.txRate ?? 0
+        var pts = (history[name] ?? [])
+            .filter { $0.date >= Date().addingTimeInterval(-liveActivityWindow) }
+            .downsampledPreservingPeaks(maxPoints: 38)
+        pts.append(HistoryPoint(timestamp: Int64(Date().timeIntervalSince1970 * 1000), rxRate: rx, txRate: tx))
+        return .init(interfaceName: name, rxRate: rx, txRate: tx, points: pts, updatedAt: Date())
+    }
+
+    private func pushLiveActivityUpdate() async {
+        guard liveActivity.isRunning, let state = liveState() else { return }
+        isLiveActivityOn = true
+        await liveActivity.update(state)
     }
 
     private func refreshHistory(client: APIClient) async {

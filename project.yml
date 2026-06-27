@@ -28,6 +28,7 @@ targets:
         # Only standard HTTPS, no non-exempt crypto — pre-answers App Store Connect's
         # export-compliance question so it isn't asked on every upload.
         ITSAppUsesNonExemptEncryption: false
+        NSSupportsLiveActivities: true
         UILaunchScreen: {}
         # Portrait-only. Lives here (not hand-edited into the generated Info.plist) so it
         # survives `xcodegen generate`.

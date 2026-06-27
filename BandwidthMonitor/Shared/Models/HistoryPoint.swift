@@ -2,7 +2,7 @@ import Foundation
 
 /// Mirrors `collector.HistoryPoint` from `/api/interfaces/history`.
 /// The server keeps up to 24h of these per interface, sampled roughly once per second.
-struct HistoryPoint: Codable {
+struct HistoryPoint: Codable, Hashable {
     let timestamp: Int64
     let rxRate: Double
     let txRate: Double

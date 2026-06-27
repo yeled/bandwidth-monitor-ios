@@ -22,6 +22,19 @@ struct ContentView: View {
             }
             .navigationTitle("Bandwidth Monitor")
             .toolbar {
+                if !serverURL.isEmpty {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            viewModel.toggleLiveActivity()
+                        } label: {
+                            Label(
+                                viewModel.isLiveActivityOn ? "Stop Live" : "Go Live",
+                                systemImage: viewModel.isLiveActivityOn ? "stop.circle.fill" : "dot.radiowaves.left.and.right"
+                            )
+                        }
+                        .tint(viewModel.isLiveActivityOn ? .red : .accentColor)
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showSettings = true
