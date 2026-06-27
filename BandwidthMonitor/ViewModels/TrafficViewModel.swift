@@ -33,6 +33,11 @@ final class TrafficViewModel {
     var errorMessage: String?
     var isLoading = false
 
+    /// True while the history on screen may be stale and a fresh full load is in flight (just after
+    /// launch or returning to foreground). Lets the chart show it's reconciling rather than
+    /// silently swapping the last hour out from under you.
+    var isReconcilingHistory = false
+
     @ObservationIgnored private var refreshTask: Task<Void, Never>?
     private let liveInterval: Duration = .seconds(2)
     private let historyRefreshEveryNTicks = 8 // ~every 16s, since live polls every 2s
@@ -46,9 +51,17 @@ final class TrafficViewModel {
 
     func start(baseURLString: String) {
         stop()
+        beginReconcile()
         refreshTask = Task {
             await refreshLoop(baseURLString: baseURLString)
         }
+    }
+
+    /// Flag the on-screen history as stale-pending-refresh — but only if there's actually data
+    /// showing. A cold launch has none and shows the empty state instead, which needs no redaction.
+    /// Call when (re)starting or returning to the foreground; cleared by the next history load.
+    func beginReconcile() {
+        isReconcilingHistory = !history.isEmpty
     }
 
     func stop() {
@@ -104,6 +117,7 @@ final class TrafficViewModel {
         do {
             history = try await client.fetchHistory()
             errorMessage = nil
+            isReconcilingHistory = false
             cacheWidgetSnapshot()
             WidgetCenter.shared.reloadTimelines(ofKind: TrafficWidgetKind.id)
         } catch {

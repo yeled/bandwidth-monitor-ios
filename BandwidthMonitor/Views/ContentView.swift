@@ -5,6 +5,7 @@ struct ContentView: View {
     @AppStorage(SettingsKey.serverURL, store: AppGroup.defaults) private var serverURL: String = ""
     @State private var viewModel = TrafficViewModel()
     @State private var showSettings = false
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         NavigationStack {
@@ -40,6 +41,11 @@ struct ContentView: View {
                 }
                 WidgetCenter.shared.reloadTimelines(ofKind: TrafficWidgetKind.id)
             }
+            .onChange(of: scenePhase) { _, phase in
+                // Returning to the foreground: the shown history may be stale until the next
+                // refresh lands. Flag it so the chart reads as reconciling, not authoritative.
+                if phase == .active { viewModel.beginReconcile() }
+            }
         }
     }
 
@@ -72,6 +78,19 @@ struct ContentView: View {
                     .pickerStyle(.segmented)
 
                     TrafficChartView(points: viewModel.chartPoints)
+                        .redacted(reason: viewModel.isReconcilingHistory ? .placeholder : [])
+                        .overlay {
+                            if viewModel.isReconcilingHistory {
+                                Label("Updating…", systemImage: "arrow.triangle.2.circlepath")
+                                    .symbolEffect(.pulse)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 6)
+                                    .background(.ultraThinMaterial, in: Capsule())
+                            }
+                        }
+                        .animation(.default, value: viewModel.isReconcilingHistory)
                         .listRowInsets(EdgeInsets())
                         .padding()
                 }
