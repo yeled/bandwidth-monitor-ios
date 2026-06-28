@@ -42,6 +42,9 @@ targets:
       properties:
         com.apple.security.application-groups:
           - group.com.evilforbeginners.BandwidthMonitor
+        # Required for ActivityKit to issue Live Activity push tokens. "development" here; the
+        # distribution provisioning profile promotes it to "production" for TestFlight/App Store.
+        aps-environment: development
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.evilforbeginners.BandwidthMonitor

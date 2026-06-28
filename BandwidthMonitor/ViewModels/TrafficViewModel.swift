@@ -41,6 +41,10 @@ final class TrafficViewModel {
     /// Whether the Lock Screen / Dynamic Island Live Activity is currently running.
     var isLiveActivityOn = false
 
+    /// APNs push token for the running Live Activity (hex). Hand to the push sender so it can drive
+    /// updates while the app is suspended. Surfaced in Settings for copying.
+    var liveActivityPushToken: String?
+
     @ObservationIgnored private var refreshTask: Task<Void, Never>?
     private let liveInterval: Duration = .seconds(2)
     private let historyRefreshEveryNTicks = 8 // ~every 16s, since live polls every 2s
@@ -58,7 +62,7 @@ final class TrafficViewModel {
     func start(baseURLString: String) {
         stop()
         beginReconcile()
-        liveActivity.adopt()
+        liveActivity.adopt { [weak self] token in self?.setLiveActivityPushToken(token) }
         isLiveActivityOn = liveActivity.isRunning
         refreshTask = Task {
             await refreshLoop(baseURLString: baseURLString)
@@ -69,9 +73,10 @@ final class TrafficViewModel {
     func toggleLiveActivity() {
         if liveActivity.isRunning {
             isLiveActivityOn = false
+            setLiveActivityPushToken(nil)
             Task { await liveActivity.stop() }
         } else if let state = liveState() {
-            liveActivity.start(state)
+            liveActivity.start(state) { [weak self] token in self?.setLiveActivityPushToken(token) }
             isLiveActivityOn = liveActivity.isRunning
             if !isLiveActivityOn {
                 errorMessage = "Enable Live Activities for Bandwidth Monitor in Settings to use this."
@@ -148,13 +153,24 @@ final class TrafficViewModel {
             .filter { $0.date >= Date().addingTimeInterval(-liveActivityWindow) }
             .downsampledPreservingPeaks(maxPoints: 38)
         pts.append(HistoryPoint(timestamp: Int64(Date().timeIntervalSince1970 * 1000), rxRate: rx, txRate: tx))
-        return .init(interfaceName: name, rxRate: rx, txRate: tx, points: pts, updatedAt: Date())
+        return .init(interfaceName: name, rxRate: rx, txRate: tx, points: pts, updatedAt: Date().timeIntervalSince1970)
     }
 
     private func pushLiveActivityUpdate() async {
         guard liveActivity.isRunning, let state = liveState() else { return }
         isLiveActivityOn = true
         await liveActivity.update(state)
+    }
+
+    /// Stores the Live Activity push token observably and in the App Group, so Settings can show it
+    /// and the pusher can read it.
+    private func setLiveActivityPushToken(_ token: String?) {
+        liveActivityPushToken = token
+        if let token {
+            AppGroup.defaults.set(token, forKey: SettingsKey.liveActivityPushToken)
+        } else {
+            AppGroup.defaults.removeObject(forKey: SettingsKey.liveActivityPushToken)
+        }
     }
 
     private func refreshHistory(client: APIClient) async {

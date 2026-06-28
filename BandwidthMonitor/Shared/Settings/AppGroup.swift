@@ -13,6 +13,7 @@ enum SettingsKey {
     static let serverURL = "serverURL"
     static let selectedInterface = "selectedInterface"
     static let widgetSnapshot = "widgetSnapshot"
+    static let liveActivityPushToken = "liveActivityPushToken"
 }
 
 extension AppGroup {

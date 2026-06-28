@@ -12,7 +12,9 @@ struct BandwidthActivityAttributes: ActivityAttributes {
         var txRate: Double
         /// Recent window for the sparkline, oldest → newest; the last element is "now".
         var points: [HistoryPoint]
-        var updatedAt: Date
+        /// Epoch seconds. A plain number (not Date) so the push sender can build the content-state
+        /// JSON without worrying about ActivityKit's date-decoding strategy.
+        var updatedAt: Double
     }
 
     /// Static for the activity's lifetime.
