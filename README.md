@@ -117,14 +117,12 @@ the (up to ~16s old) tail of the history series.
 - Pieces: `BandwidthActivityAttributes` (Shared/LiveActivity), `BandwidthLiveActivity` (the widget
   extension's Lock Screen + Dynamic Island UI), `LiveActivityController` (Services). The app target
   sets `NSSupportsLiveActivities`.
-- Updates are **local** — they only land while the app is running (foreground, briefly background).
-  When the app is fully suspended the activity stays pinned showing the last values but stops
-  ticking. Keeping it live in your pocket would need **ActivityKit push updates (APNs)** driven from
-  the server — the planned follow-up.
+- Updates are **local** while the app runs. To keep it ticking while the app is suspended, a server
+  pushes updates via ActivityKit / APNs: the app captures a push token (shown in Settings) and
+  `scripts/live_activity_push.swift` sends updates to APNs. See
+  [docs/live-activity-push.md](docs/live-activity-push.md) for setup.
 
 ## Not yet implemented
 
-- **Live Activity push (APNs):** server-driven updates so the Lock Screen view keeps ticking while
-  the app is suspended.
-- The Go server also exposes DNS, WiFi, NAT, speed test, and debug data (`/api/dns`, `/api/wifi`,
-  `/api/conntrack`, etc.) that could be added as further tabs or widgets following the same pattern.
+The Go server also exposes DNS, WiFi, NAT, speed test, and debug data (`/api/dns`, `/api/wifi`,
+`/api/conntrack`, etc.) that could be added as further tabs or widgets following the same pattern.
