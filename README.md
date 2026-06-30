@@ -3,6 +3,8 @@
 SwiftUI client for [awlx/bandwidth-monitor](https://github.com/awlx/bandwidth-monitor), showing
 live interface rates plus 1h / 24h traffic graphs, with a Lock Screen widget.
 
+Feel free to use https://mp01.spodder.com as the endpoint to test.
+
 ## Screenshots
 
 <table>
