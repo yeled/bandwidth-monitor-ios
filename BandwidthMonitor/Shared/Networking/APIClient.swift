@@ -45,6 +45,19 @@ struct APIClient {
         try await get(InterfaceHistory.self, path: "/api/interfaces/history")
     }
 
+    /// Registers a Live Activity push token with the server, which then drives the activity via APNs
+    /// (server must be built with APNs configured). Best-effort — failures are swallowed.
+    func registerLiveActivity(token: String, interface: String, environment: String) async {
+        let url = baseURL.appendingPathComponent("/api/liveactivity/register")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONEncoder().encode([
+            "token": token, "interface": interface, "environment": environment,
+        ])
+        _ = try? await session.data(for: request)
+    }
+
     private func get<T: Decodable>(_ type: T.Type, path: String) async throws -> T {
         let url = baseURL.appendingPathComponent(path)
         let (data, response) = try await session.data(from: url)

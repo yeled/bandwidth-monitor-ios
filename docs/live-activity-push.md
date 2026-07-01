@@ -1,53 +1,53 @@
 # Live Activity push (keep the Lock Screen view live)
 
 By default the Live Activity only updates while the app is running. To keep it ticking while the app
-is suspended, a server pushes updates to it via ActivityKit / APNs. `scripts/live_activity_push.swift`
-is a small, dependency-free pusher for that (CryptoKit signs the JWT, URLSession speaks HTTP/2).
+is suspended, the **bandwidth-monitor Go server pushes updates to it via ActivityKit / APNs**. The
+server ([yeled/bandwidth-monitor](https://github.com/yeled/bandwidth-monitor)) already runs
+continuously and has the data, so it's the whole "APN machine" — there's no separate pusher process.
 
-## One-time setup
+How it fits together:
 
-1. **Create an APNs auth key.** [Apple Developer → Certificates, Identifiers & Profiles → Keys](https://developer.apple.com/account/resources/authkeys/list)
-   → ➕ → enable **Apple Push Notification service (APNs)** → download the `.p8` (you can only
-   download it once) and note the **Key ID**. This is *separate* from the App Store Connect API key.
-   - Team ID is `SA2SS4242K`; bundle ID is `com.evilforbeginners.BandwidthMonitor`.
-   - The app's App ID already has the Push Notifications capability (added via the `aps-environment`
-     entitlement; automatic signing enabled it).
+1. You tap **Go Live** in the app → iOS issues a push token → the app POSTs it to the server's
+   `POST /api/liveactivity/register` (`{token, interface, environment}`). The `environment` is
+   `sandbox` for a build run from Xcode and `production` for TestFlight/App Store.
+2. The server's `liveactivity` package pushes the current content-state to APNs for each registered
+   token every `APNS_PUSH_INTERVAL`.
 
-## Each time you want it live
+## Server setup (one time)
 
-2. **Get the device's push token.** Install the app (TestFlight or a local run), open it, tap
-   **Go Live**, then open **Settings** in the app — the **Live Activity push token** row appears once
-   iOS issues one. Tap to copy.
-3. **Run the pusher** (on any Mac that can reach both the router and the internet):
+1. **Create an APNs auth key.** [Apple Developer → Keys](https://developer.apple.com/account/resources/authkeys/list)
+   → ➕ → enable **Apple Push Notification service** → download the `.p8` (once only), note the
+   **Key ID**. Team ID is `SA2SS4242K`, bundle ID `com.evilforbeginners.BandwidthMonitor`.
+2. **Put the `.p8` on the router** (chmod 0600) and set the APNs env vars (see `env.example`):
 
-   ```bash
-   swift scripts/live_activity_push.swift \
-     --key ~/path/AuthKey_<KEYID>.p8 --key-id <KEYID> --team-id SA2SS4242K \
-     --bundle-id com.evilforbeginners.BandwidthMonitor \
-     --token <token from the app> \
-     --server http://192.168.1.1:8080 --interface eth0 --interval 5
+   ```sh
+   APNS_KEY_FILE=/etc/bandwidth-monitor/AuthKey_XXXXXXXXXX.p8
+   APNS_KEY_ID=XXXXXXXXXX
+   APNS_TEAM_ID=SA2SS4242K
+   APNS_BUNDLE_ID=com.evilforbeginners.BandwidthMonitor
+   APNS_ENV=production      # or sandbox for Xcode dev builds
+   APNS_PUSH_INTERVAL=10s
    ```
 
-   It prints one line per push with the APNs status (`200` = delivered).
+   The server needs outbound HTTPS to `api.push.apple.com:443` (or `api.sandbox.push.apple.com`).
+   The feature is inert unless `APNS_KEY_FILE` is set.
 
-## Development vs production APNs
+## Using it
 
-The push token's environment must match the APNs host:
+Open the app, tap **Go Live**, and lock the phone — the Lock Screen / Dynamic Island view now keeps
+updating from the server even with the app closed. Switching the interface in the app re-registers,
+so the server pushes the newly-selected interface.
 
-| App build | `aps-environment` | APNs host | Pusher flag |
-|-----------|-------------------|-----------|-------------|
-| Run from Xcode to device | development | `api.sandbox.push.apple.com` | `--sandbox` |
-| TestFlight / App Store | production | `api.push.apple.com` | *(none — default)* |
+## Dev vs production APNs
 
-If pushes return `400 BadDeviceToken`, you're pushing to the wrong host for that token — flip the
-`--sandbox` flag.
+The push token's environment must match the APNs host, and the app sends the right one automatically
+(`#if DEBUG` → `sandbox`, else `production`). On the server, set `APNS_ENV` to match the builds
+you're testing. A `400 BadDeviceToken` in the server logs means the environments don't match.
 
-## Notes / gotchas
+## Notes
 
-- The push token is **per activity** — it changes if you stop/restart Go Live or reinstall. Grab a
-  fresh one from Settings each time.
-- The activity must already be running (you tapped **Go Live**) — push *updates* an activity, it
-  can't start one.
-- `--dry-run` builds and prints the JWT + payload from synthetic data without contacting the server
-  or APNs — useful for checking the key and encoding.
-- Keep updates modest (a few seconds apart); APNs throttles high-frequency Live Activity pushes.
+- The push token is **per activity** — it changes when you stop/restart Go Live or reinstall; the
+  app re-registers automatically. Tokens are held in memory, so after a server restart, reopen the
+  app (or toggle Go Live) to re-register.
+- The token is also shown (copyable) in the app's **Settings** for debugging.
+- APNs throttles high-frequency Live Activity pushes; keep `APNS_PUSH_INTERVAL` at a few seconds.

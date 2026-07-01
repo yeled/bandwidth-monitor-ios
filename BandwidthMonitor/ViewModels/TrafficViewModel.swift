@@ -27,6 +27,8 @@ final class TrafficViewModel {
             AppGroup.defaults.set(selectedInterface, forKey: SettingsKey.selectedInterface)
             cacheWidgetSnapshot()
             WidgetCenter.shared.reloadTimelines(ofKind: TrafficWidgetKind.id)
+            // Re-register so the server pushes the newly-selected interface to the Live Activity.
+            if let token = liveActivityPushToken { registerPushToken(token) }
         }
     }
     var timeRange: TimeRange = .oneHour
@@ -168,9 +170,25 @@ final class TrafficViewModel {
         liveActivityPushToken = token
         if let token {
             AppGroup.defaults.set(token, forKey: SettingsKey.liveActivityPushToken)
+            registerPushToken(token)
         } else {
             AppGroup.defaults.removeObject(forKey: SettingsKey.liveActivityPushToken)
         }
+    }
+
+    /// Registers the push token with the server so it can drive the Live Activity via APNs while the
+    /// app is suspended. Environment matches the build's aps-environment (sandbox for dev, production
+    /// for TestFlight/App Store), so the server pushes to the right APNs host.
+    private func registerPushToken(_ token: String) {
+        guard let serverURL = AppGroup.defaults.string(forKey: SettingsKey.serverURL),
+              let client = APIClient(baseURLString: serverURL),
+              let iface = selectedInterface else { return }
+        #if DEBUG
+        let environment = "sandbox"
+        #else
+        let environment = "production"
+        #endif
+        Task { await client.registerLiveActivity(token: token, interface: iface, environment: environment) }
     }
 
     private func refreshHistory(client: APIClient) async {

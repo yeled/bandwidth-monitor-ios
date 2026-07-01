@@ -117,9 +117,9 @@ the (up to ~16s old) tail of the history series.
 - Pieces: `BandwidthActivityAttributes` (Shared/LiveActivity), `BandwidthLiveActivity` (the widget
   extension's Lock Screen + Dynamic Island UI), `LiveActivityController` (Services). The app target
   sets `NSSupportsLiveActivities`.
-- Updates are **local** while the app runs. To keep it ticking while the app is suspended, a server
-  pushes updates via ActivityKit / APNs: the app captures a push token (shown in Settings) and
-  `scripts/live_activity_push.swift` sends updates to APNs. See
+- Updates are **local** while the app runs. To keep it ticking while the app is suspended, the app
+  registers its push token with the bandwidth-monitor **Go server**, which pushes updates via
+  ActivityKit / APNs (it already runs continuously and has the data). See
   [docs/live-activity-push.md](docs/live-activity-push.md) for setup.
 
 ## Not yet implemented
