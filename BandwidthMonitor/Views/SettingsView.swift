@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage(SettingsKey.serverURL, store: AppGroup.defaults) private var serverURL: String = ""
+    @AppStorage(SettingsKey.liveActivityPushToken, store: AppGroup.defaults) private var pushToken: String = ""
     @Environment(\.dismiss) private var dismiss
     @State private var draft: String = ""
 
@@ -17,6 +18,27 @@ struct SettingsView: View {
                     Text("Server")
                 } footer: {
                     Text("Address of your bandwidth-monitor instance (awlx/bandwidth-monitor). Plain HTTP on your LAN is fine.")
+                }
+
+                if !pushToken.isEmpty {
+                    Section {
+                        Button {
+                            UIPasteboard.general.string = pushToken
+                        } label: {
+                            HStack {
+                                Text(pushToken)
+                                    .font(.caption.monospaced())
+                                    .lineLimit(2)
+                                    .truncationMode(.middle)
+                                Spacer()
+                                Image(systemName: "doc.on.doc")
+                            }
+                        }
+                    } header: {
+                        Text("Live Activity push token")
+                    } footer: {
+                        Text("Tap to copy. Hand to the push sender (scripts/live_activity_push.py) so the Lock Screen view updates while the app is closed.")
+                    }
                 }
             }
             .navigationTitle("Settings")

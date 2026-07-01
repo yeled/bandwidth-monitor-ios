@@ -11,8 +11,8 @@ settings:
     CODE_SIGN_STYLE: Automatic
     # Single source of truth for both targets. Bump MARKETING_VERSION for a user-facing
     # release; bump CURRENT_PROJECT_VERSION for every TestFlight/App Store upload.
-    MARKETING_VERSION: "0.9.0"
-    CURRENT_PROJECT_VERSION: "2"
+    MARKETING_VERSION: "1.1.0"
+    CURRENT_PROJECT_VERSION: "5"
 
 targets:
   BandwidthMonitor:
@@ -28,6 +28,9 @@ targets:
         # Only standard HTTPS, no non-exempt crypto — pre-answers App Store Connect's
         # export-compliance question so it isn't asked on every upload.
         ITSAppUsesNonExemptEncryption: false
+        NSSupportsLiveActivities: true
+        # Raises the frequent-update budget so pushing every ~10s for hours doesn't get throttled.
+        NSSupportsLiveActivitiesFrequentUpdates: true
         UILaunchScreen: {}
         # Portrait-only. Lives here (not hand-edited into the generated Info.plist) so it
         # survives `xcodegen generate`.
@@ -41,6 +44,9 @@ targets:
       properties:
         com.apple.security.application-groups:
           - group.com.evilforbeginners.BandwidthMonitor
+        # Required for ActivityKit to issue Live Activity push tokens. "development" here; the
+        # distribution provisioning profile promotes it to "production" for TestFlight/App Store.
+        aps-environment: development
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.evilforbeginners.BandwidthMonitor

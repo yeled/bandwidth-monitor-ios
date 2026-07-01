@@ -1,7 +1,12 @@
 # Bandwidth Monitor (iOS)
 
 SwiftUI client for [awlx/bandwidth-monitor](https://github.com/awlx/bandwidth-monitor), showing
-live interface rates plus 1h / 24h traffic graphs, with a Lock Screen widget.
+live interface rates plus 1h / 24h traffic graphs, a Lock Screen widget, and a live
+Lock Screen / Dynamic Island view (Live Activity).
+
+App Store release: https://apps.apple.com/gb/app/bandwidth-monitor-remote/id6784336088
+
+Testflight betas: https://testflight.apple.com/join/DqxpPZ13
 
 Feel free to use https://mp01.spodder.com as the endpoint to test.
 
@@ -74,14 +79,16 @@ triggers iOS's local-network permission prompt (`NSLocalNetworkUsageDescription`
 ```
 BandwidthMonitor/
   App/             App entry point
+  Services/        LiveActivityController (start/update/end the Live Activity)
   Shared/          Code shared with the widget extension:
     Models/        Decodable types mirroring the Go server's JSON
     Networking/    APIClient (URLSession-based)
     Settings/      App Group accessors + widget snapshot cache
     Utilities/     BitRateFormatter (Mbps/kbps)
+    LiveActivity/  ActivityKit attributes + content state
   ViewModels/      Polling + chart-windowing logic
   Views/           SwiftUI screens
-BandwidthMonitorWidget/   WidgetKit extension (Lock Screen sparkline)
+BandwidthMonitorWidget/   WidgetKit extension: Lock Screen sparkline + Live Activity UI
 ```
 
 ## Lock Screen widget
@@ -103,6 +110,23 @@ Notes:
 - The app calls `WidgetCenter.shared.reloadTimelines` when you change the server URL or selected
   interface, so the widget updates promptly after a settings change even though it's otherwise on
   a slow OS-driven cadence.
+
+## Live Activity (live view)
+
+The **"Go Live"** toolbar button starts an [ActivityKit](https://developer.apple.com/documentation/activitykit)
+Live Activity that shows the selected interface on the **Lock Screen and Dynamic Island**: current
+↓/↑ rates in Mbps and the same mirrored sparkline as the app. The **latest sample is marked** with
+a dashed "now" rule on the x-axis plus emphasised dots on the latest RX/TX points; a synthetic
+"now" sample carrying the live rate is appended so that marker tracks the current rate rather than
+the (up to ~16s old) tail of the history series.
+
+- Pieces: `BandwidthActivityAttributes` (Shared/LiveActivity), `BandwidthLiveActivity` (the widget
+  extension's Lock Screen + Dynamic Island UI), `LiveActivityController` (Services). The app target
+  sets `NSSupportsLiveActivities`.
+- Updates are **local** while the app runs. To keep it ticking while the app is suspended, the app
+  registers its push token with the bandwidth-monitor **Go server**, which pushes updates via
+  ActivityKit / APNs (it already runs continuously and has the data). See
+  [docs/live-activity-push.md](docs/live-activity-push.md) for setup.
 
 ## Not yet implemented
 

@@ -5,5 +5,6 @@ import SwiftUI
 struct BandwidthMonitorWidgetBundle: WidgetBundle {
     var body: some Widget {
         TrafficWidget()
+        BandwidthLiveActivity()
     }
 }
