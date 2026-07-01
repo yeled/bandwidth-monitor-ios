@@ -5,6 +5,10 @@ live interface rates plus 1h / 24h traffic graphs, with a Lock Screen widget.
 
 Feel free to use https://mp01.spodder.com as the endpoint to test.
 
+App Store release: https://apps.apple.com/gb/app/bandwidth-monitor-remote/id6784336088
+
+Testflight betas: https://testflight.apple.com/join/DqxpPZ13
+
 ## Screenshots
 
 <table>
