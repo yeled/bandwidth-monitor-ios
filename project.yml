@@ -11,8 +11,8 @@ settings:
     CODE_SIGN_STYLE: Automatic
     # Single source of truth for both targets. Bump MARKETING_VERSION for a user-facing
     # release; bump CURRENT_PROJECT_VERSION for every TestFlight/App Store upload.
-    MARKETING_VERSION: "0.9.0"
-    CURRENT_PROJECT_VERSION: "4"
+    MARKETING_VERSION: "1.1.0"
+    CURRENT_PROJECT_VERSION: "5"
 
 targets:
   BandwidthMonitor:
