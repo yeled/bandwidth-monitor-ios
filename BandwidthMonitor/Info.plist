@@ -29,6 +29,8 @@
 	<string>Bandwidth Monitor connects to your router on the local network to read traffic stats.</string>
 	<key>NSSupportsLiveActivities</key>
 	<true/>
+	<key>NSSupportsLiveActivitiesFrequentUpdates</key>
+	<true/>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>

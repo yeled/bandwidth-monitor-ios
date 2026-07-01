@@ -4,6 +4,10 @@ SwiftUI client for [awlx/bandwidth-monitor](https://github.com/awlx/bandwidth-mo
 live interface rates plus 1h / 24h traffic graphs, a Lock Screen widget, and a live
 Lock Screen / Dynamic Island view (Live Activity).
 
+App Store release: https://apps.apple.com/gb/app/bandwidth-monitor-remote/id6784336088
+
+Testflight betas: https://testflight.apple.com/join/DqxpPZ13
+
 ## Screenshots
 
 <table>

@@ -29,6 +29,8 @@ targets:
         # export-compliance question so it isn't asked on every upload.
         ITSAppUsesNonExemptEncryption: false
         NSSupportsLiveActivities: true
+        # Raises the frequent-update budget so pushing every ~10s for hours doesn't get throttled.
+        NSSupportsLiveActivitiesFrequentUpdates: true
         UILaunchScreen: {}
         # Portrait-only. Lives here (not hand-edited into the generated Info.plist) so it
         # survives `xcodegen generate`.
